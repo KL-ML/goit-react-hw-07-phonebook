@@ -1,6 +1,6 @@
 import React, {
   useEffect,
-  useMemo,
+  // useMemo,
 } from "react";
 import shortid from 'shortid';
 import { Box } from "./Box";
@@ -45,11 +45,11 @@ export const App = () => {
     ));
   };
 
-  const visibleContacts = useMemo(() => {
-    return contacts.filter(n =>
-      n.name.toLowerCase().includes(filter.toLowerCase()),
-    );
-  }, [contacts, filter]);
+  // const visibleContacts = useMemo(() => {
+  //   return contacts.filter(n =>
+  //     n.name.toLowerCase().includes(filter.toLowerCase()),
+  //   );
+  // }, [contacts, filter]);
   
   const deleteContact = id => {
     dispatch(deleteContactsAction(
