@@ -1,7 +1,11 @@
 
 export const contactsInitState = {
     filter: '',
-    contacts: [],
+    contacts: {
+        items: [],
+        isLoading: false,
+        error: null,
+    },
 };
 
 // Используй функцию createAsyncThunk для объявления асинхронный генераторов экшенов и выполнения HTTP-запросов. Обработку экшенов и изменение данных в состоянии Redux сделай при помощи createSlice.
