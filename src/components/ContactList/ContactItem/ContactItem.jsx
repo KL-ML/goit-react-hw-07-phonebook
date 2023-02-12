@@ -20,8 +20,8 @@ export const ContactItem = ({ contacts, onDeleteContact }) => {
                     color="light"
                     fontFamily="body"
                     fontSize={0}
-                    py={1}
-                    px={2}
+                    py={2}
+                    px={3}
                     type="button"
                     onClick={() => onDeleteContact(id)}
                 >
