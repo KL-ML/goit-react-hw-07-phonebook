@@ -1,5 +1,5 @@
 import React, {
-  // useEffect,
+  useEffect,
   useMemo,
 } from "react";
 import shortid from 'shortid';
@@ -10,12 +10,16 @@ import { Filter } from "./Filter";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContactsAction, filterInputAction, setContactsAction } from "redux/contactsFilter/contacts.slice";
+import { getContactsThunk } from "redux/contactsFilter/contacts.thunk";
 
 export const App = () => {
   const dispatch = useDispatch();
 
   const filter = useSelector(state => state.contacts.filter);
   const contacts = useSelector(state => state.contacts.contacts);
+  console.log('contacts: ', contacts);
+  // const loading = useSelector(state => state.contacts.contacts.loading);
+  // const error = useSelector(state => state.contacts.contacts.error);
 
   const changeFilter = e => {
     dispatch(
@@ -24,13 +28,10 @@ export const App = () => {
       )
     );
   };
-  //  const [contacts, setContacts] = useState(() => {
-  //   return JSON.parse(window.localStorage.getItem('contacts')) ?? initState.contactsList.contacts;
-  // });
  
-  // useEffect(() => {
-  //   window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
+  useEffect(() => {
+    dispatch(getContactsThunk());
+  }, [dispatch]);
     
   const formSubmitHandler = ({ name, number }) => {
     const currentContact = { name: name, id: shortid.generate(), number: number }
@@ -72,13 +73,14 @@ export const App = () => {
     >
       <h1>Phonebook</h1>
       <ContactForm
-        onSubmit={formSubmitHandler} />
+        onSubmit={formSubmitHandler}
+      />
       <h2>Contacts</h2>
       <Filter
         value={filter}
         onChange={changeFilter} />
       <ContactList
-        contacts={visibleContacts}
+        contacts={contacts}
         onDeleteContact={deleteContact} />
     </Box>
   );
