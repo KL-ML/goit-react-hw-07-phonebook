@@ -9,18 +9,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterInputAction } from "redux/contactsFilter/contacts.slice";
 import { addContact, fetchContacts, deleteContact } from "redux/contactsFilter/contacts.thunk";
 import {
-  getContacts,
-  getError,
-  getFilter,
-  getIsLoading
+  selectContacts,
+  selectError,
+  selectFilter,
+  selectIsLoading
 } from "redux/contactsFilter/contacts.selectors";
 
 export const App = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
-  const filter = useSelector(getFilter);
-  const contacts = useSelector(getContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+  const filter = useSelector(selectFilter);
+  const contacts = useSelector(selectContacts);
   
   const changeFilter = e => {
     dispatch(
